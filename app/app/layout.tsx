@@ -1,40 +1,53 @@
 import Link from 'next/link';
+import { BookOpen, FileText, LayoutDashboard, ListTodo, NotebookPen, Rocket, Sparkles } from 'lucide-react';
 
-export default function RegisterPage() {
+const navItems = [
+  { href: '/app', label: '总览', icon: LayoutDashboard },
+  { href: '/app/tasks', label: '任务', icon: ListTodo },
+  { href: '/app/notes', label: '笔记', icon: NotebookPen },
+  { href: '/app/algorithms', label: '算法', icon: Rocket },
+  { href: '/app/analytics', label: '数据', icon: Sparkles },
+  { href: '/app/settings', label: '设置', icon: FileText },
+];
+
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 p-6">
-      <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <div className="mb-6 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white">
-            C
+    <div className="min-h-screen bg-slate-50">
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white p-5 md:block">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white">C</div>
+          <div>
+            <div className="text-base font-bold text-slate-900">CodePath</div>
+            <div className="text-xs text-slate-500">学习工作台</div>
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-slate-900">创建账号</h1>
-          <p className="mt-2 text-sm text-slate-500">开始你的编程学习之旅</p>
-        </div>
+        </Link>
 
-        <form className="space-y-4">
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">昵称</label>
-            <input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" type="text" placeholder="你的名字" />
-          </div>
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">邮箱</label>
-            <input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" type="email" placeholder="you@example.com" />
-          </div>
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">密码</label>
-            <input className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" type="password" placeholder="至少 8 位" />
-          </div>
-          <button type="submit" className="w-full rounded-xl bg-blue-600 px-4 py-3 font-medium text-white hover:bg-blue-700">
-            注册
-          </button>
-        </form>
+        <nav className="mt-8 space-y-1">
+          {navItems.map(({ href, label, icon: Icon }) => (
+            <Link
+              key={href}
+              href={href}
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+            >
+              <Icon className="h-4 w-4" />
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </aside>
 
-        <div className="mt-6 text-center text-sm text-slate-600">
-          已有账号？ <Link href="/login" className="font-medium text-blue-600">去登录</Link>
-        </div>
+      <div className="md:ml-64">
+        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
+          <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
+            <div className="text-sm font-semibold text-slate-700">学习平台控制台</div>
+            <div className="flex items-center gap-3">
+              <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700">已登录</span>
+              <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-900">退出</Link>
+            </div>
+          </div>
+        </header>
+        <main>{children}</main>
       </div>
-    </main>
+    </div>
   );
 }
-
