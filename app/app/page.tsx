@@ -1,54 +1,110 @@
 import Link from 'next/link';
-import { BookOpen, FileText, LayoutDashboard, ListTodo, NotebookPen, Rocket, Sparkles } from 'lucide-react';
+import {
+  ArrowUpRight,
+  BookOpen,
+  FileText,
+  LayoutDashboard,
+  ListTodo,
+  NotebookPen,
+  Rocket,
+  Sparkles,
+} from 'lucide-react';
 
-const navItems = [
-  { href: '/app', label: '总览', icon: LayoutDashboard },
-  { href: '/app/tasks', label: '任务', icon: ListTodo },
-  { href: '/app/notes', label: '笔记', icon: NotebookPen },
-  { href: '/app/algorithms', label: '算法', icon: Rocket },
-  { href: '/app/analytics', label: '数据', icon: Sparkles },
-  { href: '/app/settings', label: '设置', icon: FileText },
+const stats = [
+  { label: '本周任务', value: '12', icon: ListTodo, tone: 'bg-blue-100 text-blue-700' },
+  { label: '学习时长', value: '8.5h', icon: BookOpen, tone: 'bg-violet-100 text-violet-700' },
+  { label: '完成率', value: '86%', icon: Rocket, tone: 'bg-emerald-100 text-emerald-700' },
+  { label: '笔记数', value: '24', icon: NotebookPen, tone: 'bg-amber-100 text-amber-700' },
 ];
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+const tasks = [
+  { title: '数据结构训练营', status: '进行中', meta: '3/5 题已完成', accent: 'bg-blue-500' },
+  { title: '系统设计复盘', status: '待开始', meta: '明日 19:00', accent: 'bg-slate-400' },
+  { title: 'LeetCode 热题 30', status: '已完成', meta: '已打卡 7 天', accent: 'bg-emerald-500' },
+];
+
+const notes = [
+  { title: 'JavaScript 闭包理解', time: '今天 09:30' },
+  { title: 'Next.js 路由与渲染', time: '昨天 18:10' },
+  { title: '数据库索引优化笔记', time: '2026-10-18' },
+];
+
+export default function AppPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white p-5 md:block">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white">C</div>
-          <div>
-            <div className="text-base font-bold text-slate-900">CodePath</div>
-            <div className="text-xs text-slate-500">学习工作台</div>
-          </div>
+    <div className="space-y-6 p-6 md:p-8">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-sm font-medium text-blue-600">学习工作台</p>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">欢迎回来，开发者</h1>
+        </div>
+        <Link
+          href="/app/tasks"
+          className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+        >
+          继续学习
+          <ArrowUpRight className="h-4 w-4" />
         </Link>
+      </div>
 
-        <nav className="mt-8 space-y-1">
-          {navItems.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
-            >
-              <Icon className="h-4 w-4" />
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
-      <div className="md:ml-64">
-        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
-          <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
-            <div className="text-sm font-semibold text-slate-700">学习平台控制台</div>
-            <div className="flex items-center gap-3">
-              <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700">已登录</span>
-              <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-900">退出</Link>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {stats.map(({ label, value, icon: Icon, tone }) => (
+          <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-slate-500">{label}</span>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${tone}`}>
+                <Icon className="h-5 w-5" />
+              </div>
             </div>
+            <div className="mt-4 text-3xl font-bold text-slate-900">{value}</div>
           </div>
-        </header>
-        <main>{children}</main>
+        ))}
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-slate-900">今日任务</h2>
+            <Link href="/app/tasks" className="text-sm font-medium text-blue-600">
+              查看全部
+            </Link>
+          </div>
+
+          <div className="space-y-4">
+            {tasks.map(({ title, status, meta, accent }) => (
+              <div key={title} className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="flex items-center gap-3">
+                  <span className={`h-2.5 w-2.5 rounded-full ${accent}`} />
+                  <div>
+                    <div className="font-medium text-slate-900">{title}</div>
+                    <div className="text-sm text-slate-500">{meta}</div>
+                  </div>
+                </div>
+                <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600 shadow-sm">
+                  {status}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-slate-900">最近笔记</h2>
+            <Link href="/app/notes" className="text-sm font-medium text-blue-600">
+              查看全部
+            </Link>
+          </div>
+
+          <div className="space-y-3">
+            {notes.map(({ title, time }) => (
+              <div key={title} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                <div className="font-medium text-slate-900">{title}</div>
+                <div className="mt-1 text-sm text-slate-500">{time}</div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
-
