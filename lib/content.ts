@@ -1,38 +1,28 @@
-const notes = [
-  { title: '链表的常见解题思路', tags: ['数据结构', '链表'], updated: '2 小时前' },
-  { title: 'BFS 与 DFS 的区别', tags: ['算法', '图论'], updated: '昨天' },
-  { title: 'C++ 容器使用小结', tags: ['C++', 'STL'], updated: '3 天前' },
-];
+# CodePath
 
-export default function NotesPage() {
-  return (
-    <main className="container-shell py-10">
-      <div className="mb-6 flex items-end justify-between gap-4">
-        <div>
-          <div className="badge">个人笔记</div>
-          <h1 className="mt-3 text-3xl font-bold text-slate-900">笔记本</h1>
-        </div>
-        <button className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700">
-          新建笔记
-        </button>
-      </div>
+CodePath 是一个面向计算机专业学生的综合学习平台，覆盖学习路线、每日任务、笔记、算法题、资源库与学习数据看板。
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {notes.map((note) => (
-          <article key={note.title} className="card p-5">
-            <h2 className="text-xl font-semibold text-slate-900">{note.title}</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {note.tags.map((tag) => (
-                <span key={tag} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs text-slate-600">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div className="mt-5 text-sm text-slate-500">更新时间：{note.updated}</div>
-          </article>
-        ))}
-      </div>
-    </main>
-  );
-}
+## 现状
+
+当前仓库中已实现一个可展示、可继续扩展的前端界面，采用 Next.js + TypeScript + Tailwind 构建，整体风格与截图参考保持一致，并保留了学习平台的代码管理感。
+
+## 运行方式
+
+```bash
+npm install
+npm run dev
+```
+
+## 生产构建
+
+```bash
+npm run build
+npm run start
+```
+
+## 说明
+
+- 这是当前可用的前端原型，可继续扩展到真实的认证、数据库和管理后台。
+- 本版本重点是建立清晰的产品视觉和核心信息架构。
+- 后续可以继续接入 Supabase Auth、PostgreSQL、RLS 及真实学习功能。
 

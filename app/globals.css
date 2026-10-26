@@ -1,49 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import HomePage from '@/app/page';
 
-:root {
-  color-scheme: light;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: #f8fafc;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-.container-shell {
-  width: min(1200px, calc(100vw - 2rem));
-  margin-inline: auto;
-}
-
-.card {
-  @apply rounded-2xl border border-slate-200 bg-white shadow-soft;
-}
-
-.badge {
-  @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700;
-}
-
-.section-title {
-  @apply text-2xl font-bold tracking-tight text-slate-900 md:text-3xl;
-}
-
-.link-plain {
-  @apply text-slate-700 transition-colors hover:text-blue-600;
+export default function AppPage() {
+  return <HomePage />;
 }
