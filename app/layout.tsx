@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charSet="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="CodePath 是面向计算机专业学生的综合学习平台，帮助学生建立系统的计算机知识体系。"
-    />
-    <title>CodePath</title>
-  </head>
-  <body className="bg-slate-50 text-slate-900 antialiased">
-    <div>{children}</div>
-  </body>
-</html>
+import type { Metadata } from 'next';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'CodePath',
+  description: '计算机专业学生综合学习平台',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="zh-CN">
+      <body>
+        <div className="min-h-screen bg-slate-50 text-slate-900">{children}</div>
+      </body>
+    </html>
+  );
+}
